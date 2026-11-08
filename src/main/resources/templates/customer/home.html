@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="customer/fragments :: html-header"></head>
+<body class="flex flex-col min-h-screen bg-gray-50">
+
+    <!-- Fixed Header -->
+    <header th:replace="customer/fragments :: header"
+            class="fixed top-0 left-0 w-full z-50 bg-white shadow-md"></header>
+
+    <!-- Main Content -->
+    <main class="pt-24 flex-1 mx-auto lg:max-w-6xl md:max-w-4xl max-w-xl w-full px-4">
+        
+        <!-- Hero Section -->
+        <section th:replace="customer/fragments :: hero-section" class="mb-8"></section>
+        
+        <!-- Search Input -->
+        <div class="flex justify-center mb-6">
+            <input type="text" placeholder="Search products..."
+                   class="w-full max-w-md px-4 py-2 rounded-lg border border-gray-300
+                          focus:outline-none focus:ring-2 focus:ring-blue-500
+                          focus:border-blue-500 transition-all duration-200" />
+        </div>
+
+        <!-- Product List -->
+        <section>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 text-center mb-10">Product List</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+
+                <div th:each="product : ${products}"
+                     class="bg-gray-100 p-3 rounded-lg group overflow-hidden relative">
+
+                    <!-- Product Card -->
+                    <a th:href="@{/customer/product-detail/{id}(id=${product.id})}" class="block">
+                        <div class="w-full lg:aspect-[41/50] aspect-[41/40] overflow-hidden mx-auto">
+                            <img th:src="@{/Upload/{img}(img=${product.image})}"
+                                 alt="product"
+                                 class="h-full w-full object-contain max-lg:p-3" />
+                        </div>
+
+                        <div class="bg-white w-full py-4 px-2 rounded-lg mt-3">
+                            <div class="text-center">
+                                <h3 class="text-sm lg:text-[15px] font-semibold text-slate-900"
+                                    th:text="${product.productName}"></h3>
+
+                                <h4 class="text-sm lg:text-base text-blue-600 font-bold mt-2"
+                                    th:text="'MMK ' + ${product.price}"></h4>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Add to Cart Button -->
+                    <a th:href="@{'/customer/cart/add/' + ${product.id}}"
+                       class="mt-3 w-full inline-flex items-center justify-center gap-2
+                              py-2.5 rounded-xl
+                              bg-gradient-to-r from-blue-500 to-indigo-600
+                              text-white text-sm font-semibold
+                              shadow-md hover:shadow-lg
+                              hover:from-blue-600 hover:to-indigo-700
+                              active:scale-95 transition-all duration-200">
+                        🛒 Add to Cart
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Pagination -->
+			<div class="flex justify-center mt-8 space-x-1">
+			     <a th:if="${currentPage > 1}"
+       th:href="@{/customer/home(page=${currentPage - 1}, sort=${sortField}, dir=${sortDir}, search=${search})}"
+       class="inline-flex items-center justify-center text-body bg-neutral-secondary-medium rounded-s-base box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-3 focus:ring-neutral-tertiary leading-5 w-9 h-9 focus:outline-none">
+      <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/>
+      </svg>
+    </a>
+    <span th:if="${currentPage == 1}"
+          class="inline-flex items-center justify-center text-body bg-neutral-secondary-medium rounded-s-base box-border border border-default-medium leading-5 w-9 h-9 text-gray-400 cursor-not-allowed">
+      <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/>
+      </svg>
+    </span>
+
+    <!-- Current Page / Total Pages -->
+    <span class="inline-flex shrink-0 text-sm items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium leading-5 px-3 h-9">
+      <span th:text="${currentPage} + ' of ' + ${totalPages}"></span>
+    </span>
+
+    <!-- Next Button -->
+    <a th:if="${currentPage < totalPages}"
+       th:href="@{/customer/home(page=${currentPage + 1}, sort=${sortField}, dir=${sortDir}, search=${search})}"
+       class="inline-flex items-center justify-center text-body bg-neutral-secondary-medium rounded-e-base box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-3 focus:ring-neutral-tertiary leading-5 w-9 h-9 focus:outline-none">
+      <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
+      </svg>
+    </a>
+    <span th:if="${currentPage == totalPages}"
+          class="inline-flex items-center justify-center text-body bg-neutral-secondary-medium rounded-e-base box-border border border-default-medium leading-5 w-9 h-9 text-gray-400 cursor-not-allowed">
+      <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
+      </svg>
+    </span>
+			</div>
+
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer th:replace="customer/fragments :: footer" class="mt-auto"></footer>
+
+</body>
+</html>

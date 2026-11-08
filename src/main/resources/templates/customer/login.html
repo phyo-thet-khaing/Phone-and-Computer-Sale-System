@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="customer/fragments :: html-header"></head>
+
+<body class="min-h-screen bg-gray-50">
+
+<header th:replace="customer/fragments :: header"></header>
+	<!-- Modern Login Section -->
+<section class="min-h-screen flex items-center justify-center
+                bg-gradient-to-br from-blue-100 via-white to-blue-50 px-4">
+
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+
+    <!-- Title -->
+    <h1 class="text-3xl font-bold text-center text-blue-700 mb-2">
+      Welcome Back
+    </h1>
+    <p class="text-center text-sm text-slate-500 mb-8">
+      Login to continue shopping
+    </p>
+
+    <!-- Error Message -->
+    <div th:if="${error}"
+         class="mb-6 rounded-lg border border-red-300
+                bg-red-50 px-4 py-3 text-sm text-red-700">
+      <span th:text="${error}"></span>
+    </div>
+
+    <!-- Login Form -->
+    <form th:action="@{/customer/login/process}"
+          th:object="${customer}"
+          method="post"
+          class="space-y-6">
+
+      <!-- Email -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">
+          Email
+        </label>
+        <input
+          type="email"
+          th:field="*{email}"
+          placeholder="you@example.com"
+          required
+          class="w-full rounded-xl border border-slate-300 px-4 py-3
+                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">
+          Password
+        </label>
+        <input
+          type="password"
+          th:field="*{password}"
+          placeholder="••••••••"
+          required
+          class="w-full rounded-xl border border-slate-300 px-4 py-3
+                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Login Button -->
+      <button
+        type="submit"
+        class="w-full rounded-xl bg-gradient-to-r
+               from-blue-600 to-indigo-600
+               py-3 text-white font-semibold
+               hover:from-blue-700 hover:to-indigo-700
+               shadow-md hover:shadow-lg
+               transition">
+        Login
+      </button>
+
+    </form>
+
+    <!-- Divider -->
+    <div class="my-6 flex items-center gap-3 text-slate-400 text-sm">
+      <div class="flex-1 h-px bg-slate-200"></div>
+      OR
+      <div class="flex-1 h-px bg-slate-200"></div>
+    </div>
+
+    <!-- Register -->
+    <p class="text-center text-sm text-slate-600">
+      Don’t have an account?
+      <a th:href="@{/customer/register}"
+         class="font-semibold text-blue-600 hover:underline">
+        Register
+      </a>
+    </p>
+
+  </div>
+</section>
+
+<footer th:replace="customer/fragments :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="html-header">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <link rel="icon" th:href="@{/image/phone.jpg}" type="image/jpg">
+
+    <style>
+        .sidebar-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02);
+        }
+        .active-menu {
+            position: relative;
+        }
+        .active-menu::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 0 4px 4px 0;
+        }
+        .menu-item {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .menu-item:hover {
+            transform: translateX(4px);
+        }
+        .sidebar-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #c7d2fe transparent;
+        }
+        .sidebar-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background-color: #c7d2fe;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="relative bg-gray-50 text-gray-800 h-full min-h-screen">
+
+<nav th:fragment="sidebar" id="sidebar" class="lg:w-64">
+
+    <div id="sidebar-collapse-menu"
+         class="sidebar-shadow bg-gradient-to-b from-white to-gray-50 
+                h-screen fixed top-0 left-0 overflow-y-auto sidebar-scroll z-[99] lg:w-64 w-0 invisible lg:visible 
+                transition-all duration-300 ease-in-out">
+
+        <!-- Header Section -->
+        <div class="pt-6 pb-6 px-6 sticky top-0 bg-white/95 backdrop-blur-sm min-h-[80px] z-[100] border-b border-gray-100">
+            <a href="javascript:void(0)" class="flex items-center gap-3">
+                <div class="relative">
+                    <img th:src="@{/image/phone.jpg}" type="image/jpg" alt="logo" class="w-12 h-12 rounded-xl shadow-lg border-2 border-white" />
+                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                </div>
+                <div>
+                    <span class="font-bold text-lg bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Admin Platform</span>
+                    <p class="text-xs text-gray-500 mt-0.5">Administrator Panel</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Menu Section -->
+        <div class="py-4 px-4">
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-4 mb-3">Navigation</p>
+            <ul class="space-y-1.5">
+
+                <!-- Dashboard -->
+                <li>
+                    <a th:href="@{/admin/admin-dashboard}"
+                       class="menu-item active-menu text-primary-700 text-sm font-semibold flex items-center cursor-pointer 
+                              bg-gradient-to-r from-primary-50 to-indigo-50 rounded-xl px-4 py-3 group">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-600 to-indigo-500 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                            <i class="fa fa-tachometer-alt text-white text-sm"></i>
+                        </div>
+                        <span>Dashboard</span>
+                        <i class="fa fa-chevron-right text-primary-400 ml-auto text-xs"></i>
+                    </a>
+                </li>
+
+                <!-- Category -->
+                <li>
+                    <a th:href="@{/admin/category}"
+                       class="menu-item text-gray-700 text-sm font-medium flex items-center 
+                              cursor-pointer hover:bg-gray-50 hover:text-primary-600 rounded-xl px-4 py-3 group">
+                        <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-primary-100 transition-colors">
+                            <i class="fa fa-tag text-gray-600 group-hover:text-primary-600"></i>
+                        </div>
+                        <span>Category</span>
+                    </a>
+                </li>
+
+                <!-- Product -->
+                <li>
+                    <a th:href="@{/admin/product}"
+                       class="menu-item text-gray-700 text-sm font-medium flex items-center 
+                              cursor-pointer hover:bg-gray-50 hover:text-primary-600 rounded-xl px-4 py-3 group">
+                        <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-primary-100 transition-colors">
+                            <i class="fa fa-box text-gray-600 group-hover:text-primary-600"></i>
+                        </div>
+                        <span>Product</span>
+                    </a>
+                </li>
+
+                <!-- Customer -->
+                <li>
+                    <a th:href="@{/admin/customer}"
+                       class="menu-item text-gray-700 text-sm font-medium flex items-center 
+                              cursor-pointer hover:bg-gray-50 hover:text-primary-600 rounded-xl px-4 py-3 group">
+                        <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-primary-100 transition-colors">
+                            <i class="fa fa-users text-gray-600 group-hover:text-primary-600"></i>
+                        </div>
+                        <span>Customer</span>
+                    </a>
+                </li>
+
+                <!-- Order -->
+                <li>
+                    <a th:href="@{/admin/order}"
+                       class="menu-item text-gray-700 text-sm font-medium flex items-center 
+                              cursor-pointer hover:bg-gray-50 hover:text-primary-600 rounded-xl px-4 py-3 group">
+                        <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-primary-100 transition-colors">
+                            <i class="fa fa-shopping-cart text-gray-600 group-hover:text-primary-600"></i>
+                        </div>
+                        <span>Order</span>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <div class="border-t border-gray-100 my-4"></div>
+
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-4 mb-3">Analytics</p>
+
+                <li>
+                    <a th:href="@{/admin/report}"
+                       class="menu-item text-gray-700 text-sm font-medium flex items-center 
+                              cursor-pointer hover:bg-gray-50 hover:text-primary-600 rounded-xl px-4 py-3 group">
+                        <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-primary-100 transition-colors">
+                            <i class="fa fa-chart-line text-gray-600 group-hover:text-primary-600"></i>
+                        </div>
+                        <span>Report</span>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <div class="border-t border-gray-100 my-4"></div>
+
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-4 mb-3">Support</p>
+
+                <li>
+                    <a th:href="@{/admin/faq}"
+                       class="menu-item text-gray-700 text-sm font-medium flex items-center 
+                              cursor-pointer hover:bg-gray-50 hover:text-primary-600 rounded-xl px-4 py-3 group">
+                        <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-primary-100 transition-colors">
+                            <i class="fa fa-question-circle text-gray-600 group-hover:text-primary-600"></i>
+                        </div>
+                        <span>FAQ</span>
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- User Profile Section -->
+            <div class="mt-8 mb-4 mx-4 p-4 bg-gradient-to-r from-primary-50 to-indigo-50 rounded-2xl">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary-600 to-purple-600 flex items-center justify-center">
+                        <span class="text-white font-semibold">A</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-gray-800">Admin User</p>
+                        <p class="text-xs text-gray-600">Administrator</p>
+                    </div>
+                    <a href="#" class="text-gray-500 hover:text-primary-600">
+                        <i class="fa fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+</body>
+</html>

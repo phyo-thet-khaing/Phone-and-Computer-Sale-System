@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments :: html-header}"></head>
+
+<body class="bg-gray-100 min-h-screen flex">
+
+    <!-- Sidebar -->
+    <nav th:replace="~{admin/fragments :: sidebar}"></nav>
+
+    <!-- Page Content -->
+    <div class="flex-1 flex flex-col">
+
+        <!-- Header -->
+        <header class="bg-white border-b px-6 py-5">
+            <h1 class="text-3xl font-bold text-gray-800">Reports Dashboard</h1>
+            <p class="text-gray-500 mt-1">
+                Choose a report type to analyze sales performance
+            </p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+
+                <!-- Daily -->
+                <a th:href="@{/admin/report/daily}"
+                   class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-700 text-white p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold">Daily</h2>
+                        <svg class="w-8 h-8 opacity-80" fill="none" stroke="currentColor" stroke-width="2"
+                             viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M8 7V3M16 7V3M3 11h18M5 11v10a2 2 0 002 2h10a2 2 0 002-2V11"/>
+                        </svg>
+                    </div>
+                    <p class="mt-4 text-sm text-indigo-100">
+                        Sales report for a specific day
+                    </p>
+                </a>
+
+                <!-- Weekly -->
+                <a th:href="@{/admin/report/weekly}"
+                   class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-500 to-green-700 text-white p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold">Weekly</h2>
+                        <svg class="w-8 h-8 opacity-80" fill="none" stroke="currentColor" stroke-width="2"
+                             viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M3 7h18M5 7v14a2 2 0 002 2h10a2 2 0 002-2V7"/>
+                        </svg>
+                    </div>
+                    <p class="mt-4 text-sm text-green-100">
+                        Sales overview for a full week
+                    </p>
+                </a>
+
+                <!-- Monthly -->
+                <a th:href="@{/admin/report/monthly}"
+                   class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold">Monthly</h2>
+                        <svg class="w-8 h-8 opacity-80" fill="none" stroke="currentColor" stroke-width="2"
+                             viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M3 7h18M5 7v14a2 2 0 002 2h10a2 2 0 002-2V7"/>
+                        </svg>
+                    </div>
+                    <p class="mt-4 text-sm text-yellow-100">
+                        Sales summary for a month
+                    </p>
+                </a>
+
+                <!-- Yearly -->
+                <a th:href="@{/admin/report/yearly}"
+                   class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-500 to-red-700 text-white p-6 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold">Yearly</h2>
+                        <svg class="w-8 h-8 opacity-80" fill="none" stroke="currentColor" stroke-width="2"
+                             viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M3 7h18M5 7v14a2 2 0 002 2h10a2 2 0 002-2V7"/>
+                        </svg>
+                    </div>
+                    <p class="mt-4 text-sm text-red-100">
+                        Annual sales performance report
+                    </p>
+                </a>
+
+            </div>
+
+        </main>
+
+    </div>
+</body>
+</html>

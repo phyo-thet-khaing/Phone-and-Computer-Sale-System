@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/fragments :: html-header"></head>
+<body class="relative bg-gray-100 h-full min-h-screen antialiased">
+
+<nav th:replace="admin/fragments :: sidebar"></nav>
+
+<main class="ml-72 p-8">
+    <h1 class="text-3xl font-extrabold text-gray-900 mb-8 tracking-tight">🛍️ Order Management</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+        <div class="bg-white p-5 rounded-xl shadow-lg border-l-4 border-indigo-600 transform hover:scale-[1.02] transition duration-300">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Orders</div>
+                    <div class="text-3xl font-bold text-gray-900 mt-1" th:text="${totalOrders != null ? totalOrders : #lists.size(orders)}">0</div>
+                </div>
+                <svg class="w-8 h-8 text-indigo-400 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-lg border-l-4 border-yellow-500 transform hover:scale-[1.02] transition duration-300">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Pending</div>
+                    <div class="text-3xl font-bold text-gray-900 mt-1" th:text="${pendingOrders != null ? pendingOrders : 0}">0</div>
+                </div>
+                <svg class="w-8 h-8 text-yellow-500 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-lg border-l-4 border-blue-500 transform hover:scale-[1.02] transition duration-300">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Processing</div>
+                    <div class="text-3xl font-bold text-gray-900 mt-1" th:text="${processingOrders != null ? processingOrders : 0}">0</div>
+                </div>
+                <svg class="w-8 h-8 text-blue-500 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.836 2.582l-5.485 5.485a2 2 0 01-1.414.586h-4.4a2 2 0 01-1.414-.586L4.586 12a2 2 0 010-2.828l1.414-1.414a2 2 0 012.828 0L12 10.172l3.414-3.414a2 2 0 012.828 0l1.414 1.414a2 2 0 010 2.828z"/></svg>
+            </div>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-lg border-l-4 border-green-500 transform hover:scale-[1.02] transition duration-300">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Completed</div>
+                    <div class="text-3xl font-bold text-gray-900 mt-1" th:text="${completedOrders != null ? completedOrders : 0}">0</div>
+                </div>
+                <svg class="w-8 h-8 text-green-500 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-lg border-l-4 border-red-500 transform hover:scale-[1.02] transition duration-300">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Cancelled</div>
+                    <div class="text-3xl font-bold text-gray-900 mt-1" th:text="${cancelledOrders != null ? cancelledOrders : 0}">0</div>
+                </div>
+                <svg class="w-8 h-8 text-red-500 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-8 bg-white p-6 rounded-xl shadow-lg">
+        <div class="flex flex-wrap gap-4 items-center">
+            <div class="flex-1 min-w-[300px]">
+                <div class="relative">
+                    <input type="text" 
+                           placeholder="Search orders by ID, customer, or address..." 
+                           class="w-full px-4 py-2.5 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 text-gray-700">
+                    <svg class="absolute left-3 top-3 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div>
+                <select class="px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm text-gray-700 appearance-none bg-white pr-8">
+                    <option value="">All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Process">Process</option>
+                    <option value="Wait">Wait</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+            
+            <div>
+                <input type="date" class="px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm text-gray-700">
+            </div>
+            
+            <div>
+                <button class="px-4 py-2.5 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition duration-150 text-sm font-medium border border-transparent">
+                    <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.836 3.582l-5.485 5.485a2 2 0 01-1.414.586h-4.4a2 2 0 01-1.414-.586L4.586 12a2 2 0 010-2.828l1.414-1.414a2 2 0 012.828 0L12 10.172l3.414-3.414a2 2 0 012.828 0l1.414 1.414a2 2 0 010 2.828z"/></svg>
+                    Reset Filters
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="overflow-x-auto rounded-xl shadow-2xl bg-white mb-8">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-indigo-50 border-b border-gray-200">
+                <tr>
+                    <th class="px-6 py-4 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">ID</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">Date</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">Price</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">Address</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">Customer</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-100">
+                <tr th:each="order : ${orders}" class="hover:bg-gray-50 transition-colors duration-150">
+                    <td class="px-6 py-4 text-sm text-gray-900 font-semibold" th:text="${order.id}"></td>
+                    <td class="px-2 py-2 text-sm text-gray-600" th:text="${#dates.format(order.order_date, 'dd/MM/yyyy')}"></td>
+
+                    <td class="px-6 py-4 text-sm text-green-600 font-bold" th:text="'$' + ${#numbers.formatDecimal(order.total, 0, 'COMMA', 2, 'POINT')}"></td>
+                    
+                   <td class="px-6 py-4">
+    <select 
+        th:name="'status_' + ${order.id}" 
+        th:classappend="${order.status == 'Pending' ? 'bg-yellow-100 text-yellow-800 border-yellow-300' : 
+                          order.status == 'Process' ? 'bg-blue-100 text-blue-800 border-blue-300' : 
+                          order.status == 'Wait' ? 'bg-gray-100 text-gray-700 border-gray-300' : 
+                          order.status == 'Completed' ? 'bg-green-100 text-green-800 border-green-300' : 
+                          order.status == 'Cancelled' ? 'bg-red-100 text-red-800 border-red-300' : 'bg-gray-100 text-gray-700 border-gray-300'}"
+        class="block w-32 px-3 py-1 text-sm rounded-full font-medium appearance-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer status-select"
+        th:attr="data-id=${order.id}">
+        <option th:value="'Pending'" th:selected="${order.status == 'Pending'}" class="bg-white text-gray-800">Pending</option>
+        <option th:value="'Process'" th:selected="${order.status == 'Process'}" class="bg-white text-gray-800">Processing</option>
+        <option th:value="'Wait'" th:selected="${order.status == 'Wait'}" class="bg-white text-gray-800">Waiting</option>
+        <option th:value="'Completed'" th:selected="${order.status == 'Completed'}" class="bg-white text-gray-800">Completed</option>
+        <option th:value="'Cancelled'" th:selected="${order.status == 'Cancelled'}" class="bg-white text-gray-800">Cancelled</option>
+    </select>
+</td>
+                    <td class="px-6 py-4 text-sm text-gray-600 max-w-xs truncate" th:text="${order.address}" th:title="${order.address}"></td>
+                    <td class="px-6 py-4 text-sm text-gray-700 font-medium" th:text="${order.customer != null ? order.customer.name : 'N/A'}"></td>
+                    
+                    <td class="px-6 py-4">
+                        <div class="flex space-x-2">
+                            <a th:href="@{'/admin/order-detail/'+${order.id}}"
+                               class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-medium hover:bg-blue-700 transition duration-150 shadow-md hover:shadow-lg">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                                View
+                            </a>
+                            <a th:href="@{/admin/orders/{id}/edit(id=${order.id})}" 
+                               class="inline-flex items-center px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs font-medium hover:bg-indigo-700 transition duration-150 shadow-md hover:shadow-lg">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                                Edit
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                
+                <tr th:if="${#lists.isEmpty(orders)}">
+                    <td colspan="7" class="px-6 py-16 text-center text-gray-500">
+                        <svg class="w-20 h-20 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                        <p class="text-xl font-semibold text-gray-700">No orders found</p>
+                        <p class="text-sm mt-2 text-gray-500">Try adjusting your search or filter criteria to see results.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example" class="mt-4 flex justify-center">
+      <div class="inline-flex rounded-lg shadow-sm -space-x-px" role="group">
+
+        <a th:if="${currentPage > 1}" 
+           th:href="@{/admin/order(page=${currentPage-1})}" 
+           class="inline-flex items-center justify-center text-gray-600 bg-white rounded-l-lg box-border border border-gray-300 hover:bg-gray-100 hover:text-indigo-600 focus:ring-2 focus:ring-indigo-500 leading-5 w-10 h-10 focus:outline-none transition duration-150">
+          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/></svg>
+        </a>
+        <button th:if="${currentPage == 1}" type="button" disabled
+           class="inline-flex items-center justify-center text-gray-400 bg-gray-50 rounded-l-lg box-border border border-gray-300 leading-5 w-10 h-10 cursor-not-allowed">
+          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/></svg>
+        </button>
+
+        <button type="button" class="inline-flex shrink-0 text-sm items-center justify-center text-gray-700 bg-white box-border border-t border-b border-gray-300 leading-5 px-3 h-10 focus:outline-none font-medium">
+          <span th:text="'Page ' + ${currentPage} + ' of ' + ${totalPages}">1 of 10</span>
+        </button>
+
+        <a th:if="${currentPage < totalPages}" 
+           th:href="@{/admin/order(page=${currentPage+1})}" 
+           class="inline-flex items-center justify-center text-gray-600 bg-white rounded-r-lg box-border border border-gray-300 hover:bg-gray-100 hover:text-indigo-600 focus:ring-2 focus:ring-indigo-500 leading-5 w-10 h-10 focus:outline-none transition duration-150">
+          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/></svg>
+        </a>
+        <button th:if="${currentPage == totalPages}" type="button" disabled
+           class="inline-flex items-center justify-center text-gray-400 bg-gray-50 rounded-r-lg box-border border border-gray-300 leading-5 w-10 h-10 cursor-not-allowed">
+          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/></svg>
+        </button>
+
+      </div>
+    </nav>
+
+</main>
+
+<script>
+// Optional JavaScript for status dropdown functionality
+document.querySelectorAll('.status-select').forEach(select => {
+    select.addEventListener('change', function() {
+        const orderId = this.getAttribute('data-id');
+        const newStatus = this.value;
+        
+        // This part dynamically updates the select's appearance when changed
+        const statusClasses = {
+            'Pending': 'bg-yellow-100 text-yellow-800 border-yellow-300',
+            'Process': 'bg-blue-100 text-blue-800 border-blue-300',
+            'Wait': 'bg-gray-100 text-gray-700 border-gray-300',
+            'Completed': 'bg-green-100 text-green-800 border-green-300',
+            'Cancelled': 'bg-red-100 text-red-800 border-red-300'
+        };
+
+        // Remove old status classes
+        for (const [status, classes] of Object.entries(statusClasses)) {
+            this.classList.remove(...classes.split(' '));
+        }
+        
+        // Add new status classes
+        this.classList.add(...statusClasses[newStatus].split(' '));
+
+        // You can implement AJAX call here to update status
+        console.log(`Updating order ${orderId} to status: ${newStatus}`);
+        
+        // Example AJAX call (placeholder):
+        // fetch(`/admin/orders/${orderId}/status`, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({ status: newStatus })
+        // })
+        // .then(response => {
+        //     if (response.ok) {
+        //         // Optionally show a success toast
+        //     } else {
+        //         // Revert the UI change or show an error
+        //     }
+        // });
+    });
+});
+</script>
+
+</body>
+</html>

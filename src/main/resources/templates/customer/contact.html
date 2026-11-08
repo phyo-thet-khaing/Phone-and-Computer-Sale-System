@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="my" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="customer/fragments :: html-header"></head>
+
+<body class="flex flex-col min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+
+<header th:replace="customer/fragments :: header"></header>
+
+<main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 py-16 md:py-24">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full opacity-5 transform translate-x-32 -translate-y-32"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full opacity-5 transform -translate-x-48 translate-y-48"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                    <span class="text-yellow-300">Phone & Computer</span> ဆက်သွယ်ရန်
+                </h1>
+                <p class="text-xl text-white/90 mb-8">
+                    ဖုန်း၊ ကွန်ပျူတာ နှင့် နည်းပညာဆိုင်ရာ မေးခွန်းများ ရှိပါသလား? ကျွန်ုပ်တို့၏ ကျွမ်းကျင်သူများက အချိန်နှင့်တပြေးညီ အကူအညီပေးပါမည်။
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-4">
+                    <div class="flex items-center text-white bg-white/20 px-4 py-2 rounded-full">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>တနင်္လာ-စနေ 9AM-8PM</span>
+                    </div>
+                    <div class="flex items-center text-white bg-white/20 px-4 py-2 rounded-full">
+                        <i class="fas fa-headset mr-2"></i>
+                        <span>24/7 အွန်လိုင်းပံ့ပိုးမှု</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16 md:py-24">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                
+                <!-- LEFT SIDEBAR - CONTACT METHODS -->
+                <div class="lg:col-span-1 space-y-6">
+                    <!-- PHONE CARD -->
+                    <div class="bg-gradient-to-br from-white to-blue-50 rounded-2xl p-6 shadow-lg border border-blue-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-phone-alt text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-lg">ဖုန်းဖြင့် ဆက်သွယ်ရန်</h3>
+                                <p class="text-sm text-gray-600">တနင်္လာ-စနေ 9AM-6PM</p>
+                            </div>
+                        </div>
+                        <a href="tel:+959123456789" class="text-xl font-bold text-blue-700 hover:text-blue-800 block mb-2">
+                            +95 9 123 456 789
+                        </a>
+                        <p class="text-sm text-gray-500">အရေးပေါ် နည်းပညာပြဿနာများအတွက်</p>
+                        
+                        <div class="mt-4 pt-4 border-t border-blue-100">
+                            <p class="text-xs text-gray-600 font-medium mb-2">အခြားဖုန်းနံပါတ်များ</p>
+                            <div class="space-y-1">
+                                <a href="tel:+959987654321" class="text-sm text-gray-700 hover:text-blue-600 block">
+                                    <i class="fas fa-mobile-alt mr-2 text-gray-500"></i>+95 9 987 654 321
+                                </a>
+                                <a href="tel:+959555123456" class="text-sm text-gray-700 hover:text-blue-600 block">
+                                    <i class="fas fa-phone mr-2 text-gray-500"></i>+95 9 555 123 456
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EMAIL CARD -->
+                    <div class="bg-gradient-to-br from-white to-purple-50 rounded-2xl p-6 shadow-lg border border-purple-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-purple-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-lg">အီးမေးလ်ဖြင့် ဆက်သွယ်ရန်</h3>
+                                <p class="text-sm text-gray-600">24/7 တုံ့ပြန်မှု</p>
+                            </div>
+                        </div>
+                        <a href="mailto:support@phonecomputer.com" class="text-lg font-medium text-purple-700 hover:text-purple-800 block mb-2 break-all">
+                            support@phonecomputer.com
+                        </a>
+                        <p class="text-sm text-gray-500 mb-4">ပစ္စည်းမေးမြန်းခြင်းနှင့် အမှာစာအတွက်</p>
+                        
+                        <div class="space-y-2">
+                            <a href="mailto:sales@phonecomputer.com" class="text-sm text-gray-700 hover:text-purple-600 block">
+                                <i class="fas fa-shopping-cart mr-2 text-gray-500"></i>sales@phonecomputer.com
+                            </a>
+                            <a href="mailto:tech@phonecomputer.com" class="text-sm text-gray-700 hover:text-purple-600 block">
+                                <i class="fas fa-tools mr-2 text-gray-500"></i>tech@phonecomputer.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- LOCATION CARD -->
+                    <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-gray-700 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-lg">ဆိုင်လိပ်စာ</h3>
+                                <p class="text-sm text-gray-600">လာရောက် ကြည့်ရှုနိုင်ပါသည်</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-gray-700 font-medium flex items-start">
+                                <i class="fas fa-road mr-3 mt-1 text-blue-500"></i>
+                                <span>သရက်တောလမ်း (၃၂)၊ စမ်းချောင်းမြို့နယ်၊ ရန်ကုန်မြို့</span>
+                            </p>
+                            <p class="text-sm text-gray-600 flex items-center">
+                                <i class="fas fa-clock mr-2"></i>
+                                နေ့စဉ် 9:00 AM - 8:00 PM
+                            </p>
+                            <p class="text-sm text-gray-600 flex items-center">
+                                <i class="fas fa-store mr-2"></i>
+                                မြေညီထပ်၊ ကွန်ပျူတာနှင့် ဖုန်းဆိုင်ကြီး
+                            </p>
+                        </div>
+                        
+                        <a href="https://maps.google.com/?q=သရက်တောလမ်း(၃၂),စမ်းချောင်းမြို့နယ်,ရန်ကုန်" target="_blank" 
+                           class="inline-flex items-center justify-center mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm w-full">
+                            <i class="fas fa-directions mr-2"></i> Google Maps တွင်ကြည့်ရန်
+                        </a>
+                    </div>
+
+                    <!-- SOCIAL MEDIA -->
+                    <div class="bg-gradient-to-br from-white to-green-50 rounded-2xl p-6 shadow-lg border border-green-100">
+                        <h3 class="font-bold text-gray-800 text-lg mb-4">လူမှုကွန်ရက်များ</h3>
+                        <p class="text-sm text-gray-600 mb-4">ကျွန်ုပ်တို့နှင့် လူမှုကွန်ရက်များပေါ်တွင်လည်း ဆက်သွယ်နိုင်ပါသည်</p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="#" class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600 transition-colors duration-200">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-blue-400 flex items-center justify-center text-white hover:bg-blue-500 transition-colors duration-200">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-pink-600 flex items-center justify-center text-white hover:bg-pink-700 transition-colors duration-200">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center text-white hover:bg-blue-800 transition-colors duration-200">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="viber://chat?number=%2B959123456789" class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white hover:bg-purple-700 transition-colors duration-200">
+                                <i class="fab fa-viber"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT CONTENT - CONTACT FORM -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-200" id="contact-form">
+                        <div class="mb-8">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-2">မက်ဆေ့ပို့ရန်</h2>
+                            <p class="text-gray-600">သင့်ဖုန်း သို့မဟုတ် ကွန်ပျူတာ ပြဿနာ သို့မဟုတ် မေးခွန်းများကို ရေးသားပေးပို့နိုင်ပါသည်</p>
+                        </div>
+
+                        <form th:action="@{/customer/contact}" method="post">
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        <span class="flex items-center">
+                                            <i class="fas fa-user mr-2 text-gray-500"></i>
+                                            သင့်နာမည်
+                                        </span>
+                                    </label>
+                                    <input type="text" name="name"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                           placeholder="ဦးအောင်အောင် / မမျိုးမျိုး" required>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        <span class="flex items-center">
+                                            <i class="fas fa-envelope mr-2 text-gray-500"></i>
+                                            အီးမေးလ် လိပ်စာ
+                                        </span>
+                                    </label>
+                                    <input type="email" name="email"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                           placeholder="example@gmail.com" required>
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        <span class="flex items-center">
+                                            <i class="fas fa-phone mr-2 text-gray-500"></i>
+                                            ဖုန်းနံပါတ်
+                                        </span>
+                                    </label>
+                                    <input type="tel" name="phone"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                           placeholder="09 XXX XXX XXX">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        <span class="flex items-center">
+                                            <i class="fas fa-mobile-alt mr-2 text-gray-500"></i>
+                                            ပစ္စည်းအမျိုးအစား
+                                        </span>
+                                    </label>
+                                    <select name="category" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                        <option value="">ပစ္စည်းအမျိုးအစား ရွေးချယ်ပါ</option>
+                                        <option value="smartphone">စမတ်ဖုန်း</option>
+                                        <option value="laptop">လက်တော့ပ်/ကွန်ပျူတာ</option>
+                                        <option value="tablet">တက်ဘလက်</option>
+                                        <option value="accessories">အပိုပစ္စည်းများ</option>
+                                        <option value="repair">ပြင်ဆင်ခြင်း</option>
+                                        <option value="order">အမှာစာအကြောင်း</option>
+                                        <option value="other">အခြား</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    <span class="flex items-center">
+                                        <i class="fas fa-comment-dots mr-2 text-gray-500"></i>
+                                        မက်ဆေ့ခ်ျ
+                                    </span>
+                                </label>
+                                <textarea name="message" rows="5"
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                          placeholder="သင့်ဖုန်း၊ ကွန်ပျူတာ သို့မဟုတ် နည်းပညာဆိုင်ရာ မေးခွန်းများကို ရေးသားပါ..." required></textarea>
+                            </div>
+
+                            <div class="flex items-center mb-6">
+                                <input type="checkbox" id="newsletter" name="newsletter" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                                <label for="newsletter" class="ml-2 text-sm text-gray-600">
+                                    နည်းပညာပစ္စည်းအသစ်များ နှင့် အထူးလျှော့စျေးများအတွက် ကျွန်ုပ်တို့၏ သတင်းလွှာကို လက်ခံရယူရန်
+                                </label>
+                            </div>
+
+                            <button type="submit"
+                                    class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-8 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                                <span class="flex items-center justify-center">
+                                    <i class="fas fa-paper-plane mr-2"></i>
+                                    မက်ဆေ့ပို့ရန်
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- BUSINESS HOURS -->
+                    <div class="mt-6 bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-clock mr-2 text-blue-600"></i>
+                            ဝန်ဆောင်မှုပေးချိန်များ
+                        </h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-700 mb-2">ဆိုင်ဖွင့်ချိန်</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex justify-between">
+                                        <span>တနင်္လာ - သောကြာ</span>
+                                        <span class="font-medium">9:00 AM - 8:00 PM</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>စနေ</span>
+                                        <span class="font-medium">9:00 AM - 6:00 PM</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>တနင်္ဂနွေ</span>
+                                        <span class="font-medium text-blue-600">ဆိုင်ပိတ်ရက်</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-700 mb-2">ဖုန်းဖြင့်ဆက်သွယ်ချိန်</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex justify-between">
+                                        <span>တနင်္လာ - သောကြာ</span>
+                                        <span class="font-medium">9:00 AM - 6:00 PM</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>စနေ</span>
+                                        <span class="font-medium">9:00 AM - 4:00 PM</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>တနင်္ဂနွေ</span>
+                                        <span class="font-medium">10:00 AM - 2:00 PM</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-200">
+                            <p class="text-sm text-gray-600">
+                                <i class="fas fa-info-circle mr-2 text-blue-500"></i>
+                                ရုံးပိတ်ရက်များတွင် စာပို့ရန် အွန်လိုင်းမှတဆင့် ဆက်သွယ်နိုင်ပါသည်
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- RESPONSE TIME NOTE -->
+                    <div class="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-bolt text-blue-600 text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-blue-800 text-lg mb-2">အမြန်တုံ့ပြန်မှု ကတိပြုချက်</h4>
+                                <div class="space-y-2 text-blue-700">
+                                    <p><span class="font-medium">အရေးပေါ်နည်းပညာပြဿနာများ:</span> ရုံးချိန်အတွင်း ၂ နာရီအတွင်း တုံ့ပြန်ပေးပါမည်</p>
+                                    <p><span class="font-medium">သာမန်မေးမြန်းချက်များ:</span> ၂၄ နာရီအတွင်း အဖြေပေးပါမည်</p>
+                                    <p><span class="font-medium">အီးမေးလ်များ:</span> ၁၂ နာရီအတွင်း အပြည့်အစုံ တုံ့ပြန်ပေးပါမည်</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Details Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">သရက်တောလမ်း (၃၂) သို့ လွယ်ကူစွာ လာရောက်နည်း</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">စမ်းချောင်းမြို့နယ်၊ သရက်တောလမ်း (၃၂) တွင် အလွယ်တကူ ရောက်ရှိနိုင်သော တည်နေရာ</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="grid md:grid-cols-2">
+                    <!-- Map Placeholder -->
+                    <div class="h-96 bg-gradient-to-br from-gray-100 to-blue-50 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center p-6">
+                                <div class="w-20 h-20 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-blue-600 text-3xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Phone & Computer ဆိုင်</h3>
+                                <p class="text-gray-600 mb-4">သရက်တောလမ်း (၃၂)၊ စမ်းချောင်းမြို့နယ်</p>
+                                <a href="https://maps.google.com/?q=သရက်တောလမ်း(၃၂),စမ်းချောင်းမြို့နယ်,ရန်ကုန်" target="_blank" 
+                                   class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                                    <i class="fas fa-external-link-alt mr-2"></i> Google Maps တွင်ကြည့်ရန်
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Transportation Details -->
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                            <i class="fas fa-directions text-blue-600 mr-2"></i>
+                            လမ်းညွှန်ချက်များ
+                        </h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-bus text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1">ဘတ်စကားလမ်းကြောင်းများ</h4>
+                                    <p class="text-gray-600 text-sm">ဘတ်စကားအမှတ် ၂၃၊ ၄၅၊ ၆၇၊ ၈၉ ဖြင့် စမ်းချောင်းမြို့နယ်သို့ လာရောက်နိုင်ပါသည်</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-car text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1">ကားပါကင်နေရာ</h4>
+                                    <p class="text-gray-600 text-sm">ဆိုင်ရှေ့တွင် အခမဲ့ ကားပါကင် ၁၀ စီးအတွက် နေရာရှိပါသည်</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-walking text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1">လမ်းလျှောက်အကွာအဝေး</h4>
+                                    <p class="text-gray-600 text-sm">စမ်းချောင်းဈေးမှ ၁၀ မိနစ်ခန့် လမ်းလျှောက်ရပါသည်</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-taxi text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1">တက္ကစီများ</h4>
+                                    <p class="text-gray-600 text-sm">"သရက်တောလမ်း ၃၂၊ ဖုန်းကွန်ပျူတာဆိုင်" ဟု ပြောပါက လွယ်ကူစွာ ရောက်ရှိနိုင်ပါသည်</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 pt-6 border-t border-gray-200">
+                            <h4 class="font-semibold text-gray-800 mb-2">လမ်းကြောင်းအညွှန်း</h4>
+                            <p class="text-gray-600 text-sm">
+                                ၁. စမ်းချောင်းဈေးသို့ လာရောက်ပါ<br>
+                                ၂. ဈေးမှ သရက်တောလမ်းသို့ ဆက်သွားပါ<br>
+                                ၃. သရက်တောလမ်း ၃၂ တွင်မြေညီထပ်၊ ကြီးမားသော ဖုန်းနှင့်ကွန်ပျူတာဆိုင်ကို တွေ့ရမည်
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Help Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">အမြန်အကူအညီလိုပါသလား?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">အောက်ပါအချက်များကို စစ်ဆေးကြည့်ပါ</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="#" class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100">
+                    <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-question-circle text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg mb-2">အမေးများသော မေးခွန်းများ</h3>
+                    <p class="text-gray-600 text-sm mb-4">အဖြေအများဆုံး မေးခွန်းများကို ဖတ်ရှုရန်</p>
+                    <span class="text-blue-600 font-medium text-sm flex items-center">
+                        ဖတ်ရှုရန် <i class="fas fa-arrow-right ml-2"></i>
+                    </span>
+                </a>
+                
+                <a href="#" class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100">
+                    <div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-book text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg mb-2">အသုံးပြုနည်း လမ်းညွှန်</h3>
+                    <p class="text-gray-600 text-sm mb-4">ပစ္စည်းများအသုံးပြုနည်း လမ်းညွှန်ချက်များ</p>
+                    <span class="text-green-600 font-medium text-sm flex items-center">
+                        လေ့လာရန် <i class="fas fa-arrow-right ml-2"></i>
+                    </span>
+                </a>
+                
+                <a href="tel:+959123456789" class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-2 border-blue-200">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center mb-4">
+                        <i class="fas fa-phone text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg mb-2">တိုက်ရိုက်ဖုန်းဆက်ရန်</h3>
+                    <p class="text-gray-600 text-sm mb-4">ကျွန်ုပ်တို့၏ ဝန်ဆောင်မှုအဖွဲ့နှင့် တိုက်ရိုက်စကားပြောရန်</p>
+                    <span class="text-blue-600 font-medium text-sm flex items-center">
+                        ခေါ်ဆိုရန် <i class="fas fa-arrow-right ml-2"></i>
+                    </span>
+                </a>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full">
+                    <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                    <p class="text-gray-700">
+                        <span class="font-semibold">မှတ်ချက်:</span> ဆိုင်သို့လာရောက်မည်ဆိုပါက ယခုဖုန်းဆက်ကာ လိုအပ်သောပစ္စည်းရှိမရှိ စုံစမ်းနိုင်ပါသည်
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="customer/fragments :: footer"></footer>
+
+<script>
+    // Form submission handling
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple form validation
+                const name = this.querySelector('input[name="name"]').value;
+                const email = this.querySelector('input[name="email"]').value;
+                const message = this.querySelector('textarea[name="message"]').value;
+                
+                if (!name || !email || !message) {
+                    showAlert('ကျေးဇူးပြု၍ အချက်အလက်များ ဖြည့်စွက်ပါ', 'warning');
+                    return;
+                }
+                
+                // Show loading state
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> ပို့နေသည်...';
+                submitBtn.disabled = true;
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i> ပို့ပြီးပါပြီ!';
+                    submitBtn.classList.remove('from-blue-600', 'to-purple-600');
+                    submitBtn.classList.add('from-green-500', 'to-green-600');
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Show success message
+                    showAlert('ကျေးဇူးတင်ပါသည်! သင့်မက်ဆေ့ခ်ျကို လက်ခံရရှိပါပြီ။ ကျွန်ုပ်တို့၏ အဖွဲ့မှ ၂၄ နာရီအတွင်း ပြန်လည်ဆက်သွယ်ပေးပါမည်။', 'success');
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('from-green-500', 'to-green-600');
+                        submitBtn.classList.add('from-blue-600', 'to-purple-600');
+                    }, 3000);
+                }, 1500);
+            });
+        }
+        
+        // Show alert function
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg text-white ${
+                type === 'success' ? 'bg-green-500' : 'bg-yellow-500'
+            }`;
+            alertDiv.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'} mr-3"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            // Remove alert after 5 seconds
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+        
+        // Add hover effect to contact cards
+        const contactCards = document.querySelectorAll('.bg-gradient-to-br');
+        contactCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Phone number click tracking
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('Phone number clicked:', this.href);
+            });
+        });
+        
+        // Email click tracking
+        document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('Email clicked:', this.href);
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

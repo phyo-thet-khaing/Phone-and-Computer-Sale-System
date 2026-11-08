@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="customer/fragments :: html-header">
+    <!-- html2pdf Library for PDF Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+ <style>
+@media print {
+    /* Hide buttons when printing */
+    .no-print {
+        display: none !important;
+    }
+}
+</style>
+
+
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-50">
+
+    <!-- Header -->
+    <header th:replace="customer/fragments :: header"></header>
+
+    <!-- Invoice Content -->
+    <main class="flex-1 p-8">
+        <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6 invoice-box">
+
+            <!-- Invoice Title -->
+            <h2 class="text-3xl font-bold mb-6 text-center">Invoice</h2>
+
+            <!-- Customer Info -->
+            <div class="mb-6 border-b pb-4">
+                <p><strong>Customer Name:</strong> 
+                    <span th:text="${saveOrder.customer.name}">John Doe</span>
+                </p>
+                <p><strong>Address:</strong> 
+                    <span th:text="${saveOrder.customer.address}">123 Main St</span>
+                </p>
+            </div>
+
+            <!-- Items Table -->
+            <table class="w-full table-auto border border-gray-300 mb-6">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border px-4 py-2">Product</th>
+                        <th class="border px-4 py-2">Quantity</th>
+                        <th class="border px-4 py-2">Unit Price</th>
+                        <th class="border px-4 py-2">Total</th>
+                    </tr>
+                </thead>
+
+                <tbody th:if="${saveOrder != null and saveOrder.orderDetails != null and !#lists.isEmpty(saveOrder.orderDetails)}">
+                    <tr th:each="item : ${saveOrder.orderDetails}">
+                        <td class="border px-4 py-2" th:text="${item.product != null ? item.product.productName : 'N/A'}">Product 1</td>
+                        <td class="border px-4 py-2" th:text="${item.quantity}">1</td>
+                        <td class="border px-4 py-2" th:text="${item.product != null ? item.product.price : 0}">$10</td>
+                        <td class="border px-4 py-2" th:text="${item.setPrice}">$10</td>
+                    </tr>
+                </tbody>
+
+                <tbody th:if="${saveOrder == null or saveOrder.orderDetails == null or #lists.isEmpty(saveOrder.orderDetails)}">
+                    <tr>
+                        <td class="border px-4 py-2 text-center" colspan="4">No items found.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Total -->
+            <div th:if="${saveOrder != null}" class="text-right text-xl font-bold mb-4">
+                Total: <span th:text="${saveOrder.total}">$0</span>
+            </div>
+            <div th:if="${saveOrder == null}" class="text-right text-xl font-bold mb-4">
+                Total: $0
+            </div>
+	
+            <!-- Action Buttons -->
+            <div class="flex justify-end gap-4 mt-6 no-print">
+                <button onclick="printInvoice()"
+                        class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                    Print Invoice
+                </button>
+
+                <button onclick="downloadInvoice()"
+                        class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                    Download PDF
+                </button>
+            </div>
+</div>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer th:replace="customer/fragments :: footer"></footer>
+
+    <!-- JavaScript -->
+ <script>
+ function printInvoice() {
+	    const invoiceContent = document.querySelector(".invoice-box");
+	    if (!invoiceContent) return alert("Invoice content not found!");
+
+	    const printWindow = window.open('', '_blank', 'width=900,height=600');
+
+	    printWindow.document.write(`
+	        <html>
+	        <head>
+	            <title>Invoice</title>
+	            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+	            <style>
+	                body { padding: 20px; font-family: sans-serif; }
+	                table { border-collapse: collapse; width: 100%; }
+	                th, td { border: 1px solid #d1d5db; padding: 0.5rem 1rem; text-align: left; }
+	                th { background-color: #e5e7eb; }
+	                /* Hide buttons in print */
+	                .no-print { display: none !important; }
+	            </style>
+	        </head>
+	        <body>
+	            ${invoiceContent.outerHTML}
+	        </body>
+	        </html>
+	    `);
+
+	    printWindow.document.close();
+	    printWindow.focus();
+	    printWindow.print();
+	}
+
+</script>
+
+
+
+</body>
+</html>

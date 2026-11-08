@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/fragments :: html-header"></head>
+
+<body class="bg-gray-50 min-h-screen relative">
+
+    <!-- Sidebar -->
+    <nav th:replace="admin/fragments :: sidebar"></nav>
+
+    <!-- Main Content -->
+    <main class="ml-72 p-8">
+
+        <!-- Header -->
+        <div class="sticky top-0 z-10 bg-white border-b border-gray-200 px-6 py-5 flex justify-between items-center shadow-sm">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Add / Edit Product</h1>
+                <p class="text-gray-500 text-sm mt-1">Fill in or update the product details</p>
+            </div>
+            <a th:href="@{/admin/product}" 
+               class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                Cancel
+            </a>
+        </div>
+
+        <!-- Form Section -->
+        <div class="mt-8 max-w-6xl mx-auto">
+            <form method="post" th:action="@{${product != null} ? '/admin/product-edit/process' : '/admin/product-add/process'}" enctype="multipart/form-data"
+                  class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Hidden ID for Update -->
+                <input type="hidden" name="id" th:value="${product != null ? product.id : ''}" />
+
+                <!-- Left Column: Product Info -->
+                <div class="lg:col-span-2 space-y-6">
+
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 space-y-6">
+                        <h2 class="text-lg font-semibold text-gray-900">Product Information</h2>
+                        <p class="text-gray-500 text-sm">Basic details about your product</p>
+
+                        <!-- Product Name -->
+					    <div>
+					    <label for="productName" class="block text-sm font-medium text-gray-800 mb-2">
+					        Product Name <span class="text-rose-500">*</span>
+					    </label>
+					    <input type="text" id="productName" name="productName" required
+					           placeholder="Enter product name"
+					           th:value="${product != null ? product.productName : ''}"
+					           class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg
+					                  focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
+					                  text-gray-900 placeholder-gray-400 transition">
+						</div>
+
+
+                        <!-- Description -->
+                        <div>
+                            <label for="description" class="block text-sm font-medium text-gray-800 mb-2">
+                                Description <span class="text-rose-500">*</span>
+                            </label>
+                            <textarea id="description" name="description" required rows="4"
+                                      placeholder="Describe your product..."
+                                      class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg
+                                             focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
+                                             text-gray-900 placeholder-gray-400 resize-none transition"
+                                      th:text="${product != null ? product.description : ''}"></textarea>
+                        </div>
+
+                        <!-- Price, Quantity, Date, Category -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                            <div>
+                                <label for="price" class="block text-sm font-medium text-gray-800 mb-2">
+                                    Price <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="number" id="price" name="price" required min="0" step="0.01"
+                                       placeholder="0.00"
+                                       th:value="${product != null ? product.price : ''}"
+                                       class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg
+                                              focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
+                                              text-gray-900 placeholder-gray-400 transition">
+                            </div>
+
+                            <div>
+                                <label for="quantity" class="block text-sm font-medium text-gray-800 mb-2">
+                                    Quantity <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="number" id="quantity" name="quantity" required min="0"
+                                       placeholder="Enter quantity"
+                                       th:value="${product != null ? product.quantity : ''}"
+                                       class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg
+                                              focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
+                                              text-gray-900 placeholder-gray-400 transition">
+                            </div>
+
+                            <div>
+                                <label for="date" class="block text-sm font-medium text-gray-800 mb-2">
+                                    Date <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="date" id="date" name="date" required
+                                       th:value="${product != null ? #dates.format(product.date, 'yyyy-MM-dd') : ''}"
+                                       class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg
+                                              focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
+                                              text-gray-900 transition">
+                            </div>
+
+                            <div>
+                                <label for="category" class="block text-sm font-medium text-gray-800 mb-2">
+                                    Category <span class="text-rose-500">*</span>
+                                </label>
+                                <select id="category" name="category.id" required
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg
+                                               focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
+                                               text-gray-900 appearance-none transition">
+                                    <option value="" disabled>Select category</option>
+                                    <option th:each="category : ${categories}" 
+                                            th:value="${category.id}" 
+                                            th:text="${category.name}"
+                                            th:selected="${product != null ? product.category.id == category.id : false}">
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Image & Actions -->
+                <div class="space-y-6">
+
+                    <!-- Image Upload -->
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 text-center">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-2">Product Image</h2>
+                        <p class="text-gray-500 text-sm mb-4">Upload product photo</p>
+                        <input type="file" name="file"
+                               class="w-full border border-gray-300 rounded-lg p-3 bg-gray-50 cursor-pointer"
+                               accept="image/png, image/jpeg, image/webp" />
+                        <p class="text-xs text-gray-400 mt-2">PNG, JPG, WEBP up to 5MB</p>
+
+                        <!-- Display current image if editing -->
+                        <div th:if="${product != null and product.image != null}" class="mt-4">
+                            <img th:src="@{${product.image}}" alt="Current Image" class="w-full h-48 object-cover rounded-lg" />
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 space-y-3">
+                        <button type="submit"
+                                class="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-semibold py-3.5 rounded-lg hover:from-indigo-700 hover:to-indigo-800 transition shadow">
+                            Save Product
+                        </button>
+                        <button type="button"
+                                class="w-full border border-gray-300 text-gray-700 font-medium py-3.5 rounded-lg hover:bg-gray-50 transition">
+                            Save as Draft
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>

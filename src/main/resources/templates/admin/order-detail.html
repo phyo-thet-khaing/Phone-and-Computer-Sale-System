@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/fragments :: html-header"></head>
+
+<body class="bg-gray-100 min-h-screen">
+
+    <nav th:replace="admin/fragments :: sidebar"></nav>
+
+    <div class="ml-72 p-6">
+
+        <!-- Title -->
+        <h1 class="text-2xl font-bold mb-4">Order Detail</h1>
+
+        <!-- Order Info -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-semibold mb-2">Order Info</h2>
+
+            <p><strong>Order ID:</strong> <span th:text="${order.id}"></span></p>
+            <p><strong>Date:</strong> <span th:text="${#dates.format(order.order_date, 'yyyy-MM-dd')}"></span></p>
+            <p><strong>Status:</strong> <span th:text="${order.status}"></span></p>
+            <p><strong>Total:</strong> <span th:text="${order.total}"></span> MMK</p>
+            <p><strong>Address:</strong> <span th:text="${order.address}"></span></p>
+
+            <p class="mt-2">
+                <strong>Customer:</strong> 
+                <span th:text="${order.customer.name}"></span>
+                ( <span th:text="${order.customer.email}"></span> )
+            </p>
+        </div>
+
+        <!-- Order Items Table -->
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-3">Order Items</h2>
+
+         <table class="w-full border-collapse">
+    <thead>
+        <tr class="bg-gray-200">
+            <th class="p-2 border">Product</th>
+            <th class="p-2 border">Quantity</th>
+            <th class="p-2 border">Total Price</th>
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="detail : ${order.orderDetails}">
+            <td class="p-2 border" th:text="${detail.product.productName}"></td>
+            <td class="p-2 border" th:text="${detail.quantity}"></td>
+            <td class="p-2 border" th:text="${detail.setPrice}"></td>
+            
+        </tr>
+
+        <!-- If no items -->
+        <tr th:if="${#lists.isEmpty(order.orderDetails)}">
+            <td colspan="4" class="p-3 text-center text-gray-500">
+                No order items found.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+    </div>
+</body>
+
+</html>
